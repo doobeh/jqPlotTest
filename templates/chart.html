@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Date Axes</title>
+    <link class="include" rel="stylesheet" type="text/css"
+          href="/static/jquery.jqplot.min.css" />
+    <!--[if lt IE 9]><script language="javascript" type="text/javascript"
+                             src="/static/excanvas.js"></script><![endif]-->
+    <script class="include" type="text/javascript"
+            src="/static/jquery.min.js"></script>
+</head>
+<body>
+    <div id="chart" style="height:300px; width:650px;"></div>
+    <script class="code" type="text/javascript">
+        $(document).ready(function(){
+            $.getJSON('/_get_data',function (data) {
+               console.log(data.output);
+               $.jqplot('chart', [data.output], {
+                    title:'Customized Date Axis',
+                    axes:{
+                        xaxis:{
+                            renderer:$.jqplot.DateAxisRenderer,
+                            tickOptions:{formatString:'%b %#d, %#I %p'},
+                        }
+                    },
+                    series:[{
+                        lineWidth:2,
+                        markerOptions:{style:'diamond',size:10},
+                        rendererOptions: {
+                            smooth: true
+                        }
+                    }]
+                });
+            });
+        });
+    </script>
+    <script class="include" type="text/javascript"
+            src="/static/jquery.jqplot.min.js"></script>
+    <script class="include" language="javascript" type="text/javascript"
+            src="/static/plugins/jqplot.dateAxisRenderer.min.js"></script>
+</body>
+</html>
